@@ -32,10 +32,10 @@ namespace Photon.Pun.UtilityScripts
 		{
 			print ("AmountCheckingBeforeEntering");
 			GameLobbyName = EventSystem.current.currentSelectedGameObject.name;
-			//			http://apienjoybtc.exioms.me/api/Balance/balancefetch?userid=2&gamesessionid=1&dblbidamt=100
+//			http://apienjoybtc.exioms.me/api/Balance/balancefetch?userid=2&gamesessionid=1&dblbidamt=100
 			id=null;
 			id=PlayerPrefs.GetString("userid");
-			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/balancefetch?userid="+2+"&gamesessionid=1&dblbidamt="+EventSystem.current.currentSelectedGameObject.name);
+			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/balancefetch?userid="+PlayerPrefs.GetString("userid")+"&gamesessionid=1&dblbidamt="+EventSystem.current.currentSelectedGameObject.name);
 			www.chunkedTransfer = false;
 			www.downloadHandler = new DownloadHandlerBuffer ();
 			yield return www.SendWebRequest ();

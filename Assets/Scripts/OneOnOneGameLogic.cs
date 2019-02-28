@@ -15,6 +15,11 @@ namespace Photon.Pun.UtilityScripts
 	{
 		public string ThisLobbyName=null;
 		public string ThisRoomName = null;
+		public Text Countdown;
+
+		public int TimePeriod;
+		public int TimePeriodTriggeredTime;
+		bool isTimeOut;
 
 		public GameObject QuitPanel;
 
@@ -172,7 +177,7 @@ namespace Photon.Pun.UtilityScripts
 			} else if (PhotonNetwork.PlayerList.Length == 1) {
 				DisconnectPanel.SetActive (true);
 				ReconnectButton.SetActive(false);
-				DisconnectText.text="WAIT FOR A WHILE TO CONNECT OTHER PLAYER";
+				DisconnectText.text="WAIT TILL THE COUNTDOWN TO CONNECT OTHER PLAYER";
 			}
 		}
 
@@ -180,6 +185,7 @@ namespace Photon.Pun.UtilityScripts
 
 		void Update()
 		{		
+			RoomCanBeDiscard ();
 			if (Input.GetKeyDown (KeyCode.Escape) ) {
 				print ("Pressing Escape");
 				QuitPanel.GetComponent<Animator> ().SetInteger ("Counter", 1);
@@ -199,6 +205,51 @@ namespace Photon.Pun.UtilityScripts
 			DisableAllButtons ();
 		}
 
+		void RoomCanBeDiscard(){
+			if (!isTimeOut && PhotonNetwork.CurrentRoom.PlayerCount == 1) {
+				if (TimePeriodTriggeredTime == 0) {
+					TimePeriodTriggeredTime = (int)Time.time;
+				}
+				if (TimePeriod < 60) {
+					TimePeriod = (int)(Time.time - TimePeriodTriggeredTime);
+					Countdown.text = "" + (60 - TimePeriod);
+				}
+				if (TimePeriod == 60 && !isTimeOut) {
+					//call the room discard coroutine
+					isTimeOut=true;
+					StartCoroutine(RoomDiscard());
+				}
+			}
+		}
+		//http://apienjoybtc.exioms.me/api/Home/discardroom?struserid=2&strgamesessionid=1&roomid=4dsfvcdwsdvgerfgregr&intstatus=3  
+		IEnumerator RoomDiscard()
+		{
+			print("RoomDiscard()");
+			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Home/discardroom?struserid="+PlayerPrefs.GetString("userid")+"&strgamesessionid="+1+"&roomid="+PhotonNetwork.CurrentRoom.Name+"&intstatus="+3);
+			www.chunkedTransfer = false;
+			www.downloadHandler = new DownloadHandlerBuffer ();
+			yield return www.SendWebRequest ();
+			if (www.error != null) {
+				print ("Something went Wrong");
+			} else {
+				string msg = www.downloadHandler.text;
+				print( www.downloadHandler.text);
+				msg = msg.Substring (1, msg.Length - 2);
+				JSONNode jn = SimpleJSON.JSONData.Parse (msg);
+				msg = jn [0];
+				print (msg);
+				if (msg.Equals ("Discardroomorsuccessfullyplayedgame")) {
+					
+					StartCoroutine (AutoDisconnectFromRoom ());
+				
+				}
+			}
+		}
+		IEnumerator AutoDisconnectFromRoom(){
+			DisconnectText.text = "OTHER PLAYER IS NOT CONNECTED WITHIN TIME SO, QUITING THIS GAME";
+			yield return new WaitForSeconds (2);
+			QuitTheRoom ();
+		}
 		//=====================Enable the Quit Button=====================//
 		public void EnableQuitTheRoom()
 		{
@@ -218,6 +269,7 @@ namespace Photon.Pun.UtilityScripts
 
 			StartCoroutine (QuitTheRoom1 ());
 		}
+
 		IEnumerator QuitTheRoom1()
 		{
 			yield return new WaitForSeconds (.5f);
@@ -1811,6 +1863,7 @@ namespace Photon.Pun.UtilityScripts
 
 				} else {
 					LosePanel.SetActive (true);
+					StartCoroutine (LosserAPI ("2", "2"));
 				}
 			}
 			if (totalGreenInHouse > 3) 
@@ -1822,6 +1875,7 @@ namespace Photon.Pun.UtilityScripts
 					StartCoroutine(WinnerAPI("4","4"));
 				} else {
 					LosePanel.SetActive (true);
+					StartCoroutine (LosserAPI ("4", "4"));
 				}
 			}
 
@@ -1965,7 +2019,25 @@ namespace Photon.Pun.UtilityScripts
 				print (msg2);
 			}
 		}
-
+		//http://apienjoybtc.exioms.me/api/Balance/gameloss?userid=2&gamesessionid=1&intWalletType=2&dblamt=100&gametype=2&roomid=2PLDO1&date=27/02/2019&playercolor=1&playerid=1
+		IEnumerator LosserAPI(string playerid,string playerColor){
+			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/gameloss?userid="+PlayerPrefs.GetString("userid")+"&intWalletType=2&dblamt="+PhotonNetwork.CurrentLobby.Name+"&gametype=2&roomid="+PhotonNetwork.CurrentRoom.Name+"&date="+System.DateTime.Now.ToString ("d")+"&playercolor="+playerColor+"&playerid="+playerColor);
+			www.chunkedTransfer = false;
+			www.downloadHandler = new DownloadHandlerBuffer ();
+			yield return www.SendWebRequest ();
+			if (www.error != null) {
+				print ("Something went wrong " + www.error);
+			} else {
+				print (www.downloadHandler.text);
+				string msg = www.downloadHandler.text;
+				msg = msg.Substring (1, msg.Length - 2);
+				JSONNode jn = SimpleJSON.JSONData.Parse (msg);
+				msg = jn [0];
+				if (msg.Equals ("Recordadded")) {
+					print (msg);
+				}
+			}
+		}
 		public void MakeTurn(string data)
 		{
 			string temp1 = null;
@@ -1981,11 +2053,12 @@ namespace Photon.Pun.UtilityScripts
 			print ("OnTurnBegins(int turn)");
 			if (ActualPlayerCanPlayAgain == true && isMyTurn==true ) 
 			{
-				print ("Sending Blank Turn" + " isMyTurn" + isMyTurn);
-				ActualPlayerCanPlayAgain = false;
-				BlankTurn1.Add ("None", ""+0);
-				temp = BlankTurn1.ToString ();
-				this.MakeTurn (temp);
+//				print ("Sending Blank Turn" + " isMyTurn" + isMyTurn);
+//				ActualPlayerCanPlayAgain = false;
+//				BlankTurn1.Add ("None", ""+0);
+//				temp = BlankTurn1.ToString ();
+//				this.MakeTurn (temp);
+				SendBlankTurn();
 			}
 		}
 		public void OnTurnCompleted(int turn)
@@ -2262,14 +2335,16 @@ namespace Photon.Pun.UtilityScripts
 		public override void OnDisconnected (DisconnectCause cause)
 		{
 			//Enable Reconnection Panel and Reset all the all the values of image and counters
-			playerCounter-=1;
-			TriggeredTime = 0;
-			TriggerCounter = 0;
-			timer = 0;
-			TimerImage.fillAmount = 1;
-			DisconnectPanel.SetActive (true);
-			DisconnectText.text = "DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
-			ReconnectButton.SetActive (true);		
+			if (!isTimeOut) {
+				playerCounter -= 1;
+				TriggeredTime = 0;
+				TriggerCounter = 0;
+				timer = 0;
+				TimerImage.fillAmount = 1;
+				DisconnectPanel.SetActive (true);
+				DisconnectText.text = "DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
+				ReconnectButton.SetActive (true);
+			}	
 		}
 	}
 }
