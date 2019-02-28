@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: c393e367bd952a642816cb4d4f053576
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Nasalization
+  fontNames:
+  - Nasalization
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1f56d4d032bff2743961c714bf0132e7, type: 3}
+  - {fileID: 12800000, guid: 2913e1b14aecb6e489ebc3e7b42e186d, type: 3}
+  - {fileID: 12800000, guid: b26067f20f63a2748a58e7efe2dadbcd, type: 3}
+  - {fileID: 12800000, guid: b7ea12687f1e1fc439e0a34ddcef807e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

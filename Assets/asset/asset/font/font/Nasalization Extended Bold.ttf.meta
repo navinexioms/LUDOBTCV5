@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4b90458e544be4f4fac4f3b8c8b3d907
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Nasalization Extended
+  fontNames:
+  - Nasalization Extended
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3fc87cfbf98600848a80a56710872777, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

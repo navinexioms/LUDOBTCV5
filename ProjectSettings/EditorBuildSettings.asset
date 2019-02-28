@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: fb4a9641d710b7b44ab3366242efb47e
+  - enabled: 1
+    path: Assets/Scenes/GameMenu.unity
+    guid: 9f077e2bca4d17942b663565b70f5f2c
+  - enabled: 1
+    path: Assets/Scenes/ExtraScenes.unity
+    guid: 16e5d3bce32b14e4ca19500d8365a4f6
+  - enabled: 1
+    path: Assets/Scenes/ProfileScene.unity
+    guid: ff807bb583053fc488fefd20b224c48b
+  - enabled: 1
+    path: Assets/Scenes/SettingScene.unity
+    guid: 4606ff63cf702bc42b781768ecb471f6
+  - enabled: 1
+    path: Assets/Scenes/TransactionScene.unity
+    guid: 4fe97741c5c95f54f94010ead7a0caa2
+  - enabled: 1
+    path: Assets/Scenes/WalletScene.unity
+    guid: 741398eb3b21ab447b3c2029cfe99c07
+  - enabled: 1
+    path: Assets/Scenes/GameBoardScene/FourPlayerGameScene.unity
+    guid: a50ff5db114c07a45adc8b178763ddb1
+  - enabled: 1
+    path: Assets/Scenes/RandomPlay/BettingAmountForOneOnOne.unity
+    guid: 0669d53263a90854cbc53744e96bdf3e
+  - enabled: 1
+    path: Assets/Scenes/RandomPlay/BettingAmountFor4PlayerRandom.unity
+    guid: 82d6024a9d1d92d4db78ec5498dc115a
+  - enabled: 1
+    path: Assets/Scenes/PlayWithFriends/BettingAmountFor2PlayerPlayWithFriends.unity
+    guid: 8d9ced0487d473d45b7d0f0a0c1f65c0
+  - enabled: 1
+    path: Assets/Scenes/PlayWithFriends/BettingAmountFor4PlayerPlayWithFriends.unity
+    guid: 7a50e881c407bfb448569a0ae01d6fe0
+  - enabled: 1
+    path: Assets/Scenes/GameBoardScene/PlayerVSAI.unity
+    guid: e16e532647ba6664e8b2c717a59ebcb9
+  - enabled: 1
+    path: Assets/Scenes/RandomPlay/ColorPickingForOneOnOne.unity
+    guid: 2d1ee19e451965243bcddc42f126e713
+  - enabled: 1
+    path: Assets/Scenes/RandomPlay/ColorPickingFor4PlayerRandom.unity
+    guid: a0cfc722a13590a48b020489cd09773d
+  - enabled: 1
+    path: Assets/Scenes/PlayWithFriends/ColorPickingFor2PlayerPlayWithFriends.unity
+    guid: 6018cac98561c5a48ae5678422e52dac
+  - enabled: 1
+    path: Assets/Scenes/PlayWithFriends/ColorPickingFor4PlayerPlayWithFriends.unity
+    guid: 9fef9fde000437547b1366bc1743dcf0
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: afe47955b33271841b6c0c7cbc860003
+  - enabled: 1
+    path: Assets/Scenes/GameBoardScene/OneOnOneGameBoard.unity
+    guid: 7903b43dc55b31e4b87a7208219c0c49
+  - enabled: 1
+    path: Assets/Scenes/PlayWithFriends/PlayWithFriend.unity
+    guid: 13580cf09bd69c64c942f7d4d3d0d2cd

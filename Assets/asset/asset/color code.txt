@@ -1,0 +1,11 @@
+green 7ab25a
+
+blue 06a4ce
+
+grey bbbcbf
+
+other grey 929496
+
+gold  ffa800
+
+white

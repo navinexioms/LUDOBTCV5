@@ -1,0 +1,7 @@
+profile 183x183
+
+avvatar 148x148
+
+dashboard  134x134
+
+game  120x120
