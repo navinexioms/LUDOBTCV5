@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon;
+using UnityEngine.SceneManagement;
 namespace Photon.Pun.UtilityScripts
 {
 	public class PlayWithFriendSceneManager : Photon.Pun.MonoBehaviourPun
@@ -18,45 +19,51 @@ namespace Photon.Pun.UtilityScripts
 		public Text WarningText;
 		public void SelectTwoPlayerGamePlay()
 		{
-			Destroy (this.GetComponent<FPPWFConnectionManager> ());
-			if (this.GetComponent<TPPWFConnectionManager> () == null) {
-				this.gameObject.AddComponent<TPPWFConnectionManager> ();
-				TPPWF = this.GetComponent<TPPWFConnectionManager> ();
-				Button btn = TwoPlayerButton.GetComponent<Button> ();
-				btn.onClick.AddListener(() =>TPPWF.CreateOrJoinRoomMethod());
-				TPPWF.RoomName = TwoPlayerText;
-				TPPWF.WarningText = WarningText;
-			}
-			TwoPlayerGameObject.SetActive (TwoPlayerToggle.isOn);
+			
 			isSelectedGameType = true;
+			TwoPlayerGameObject.SetActive (true);
 			FourPlayerGameObject.SetActive (false);
-			FourPlayerButton.SetActive (false);
 			TwoPlayerButton.SetActive (true);
+			FourPlayerButton.SetActive (false);
 		}
 		public void SelectFourPlayerGamePlay()
 		{
-			Destroy (this.GetComponent<TPPWFConnectionManager> ());
-			if (this.GetComponent<FPPWFConnectionManager> () == null) {
-				this.gameObject.AddComponent<FPPWFConnectionManager> ();
-				FPPWF = this.GetComponent<FPPWFConnectionManager> ();
-				Button btn = FourPlayerButton.GetComponent<Button> ();
-				btn.onClick.AddListener (() => FPPWF.CreateOrJoinRoomMethod());
-				FPPWF.WarningText = WarningText;
-				FPPWF.RoomName = FourPlayerText;
-			}
+			print ("Hello");
+			StartCoroutine(RoomNameWarning("This feature will be added very soon"));
+//			FourPlayerGameObject.SetActive (true);
 			TwoPlayerGameObject.SetActive (false);
 			isSelectedGameType = true;
-			FourPlayerGameObject.SetActive (FourPlayerToggle.isOn);
-			FourPlayerButton.SetActive (true);
 			TwoPlayerButton.SetActive (false);
+//			FourPlayerButton.SetActive (true);
 		}
 		public void TakeRoomNameForTwoPlayers()
 		{
-			
+			if (!isSelectedGameType) {
+				StartCoroutine (RoomNameWarning ("Please select the gametype"));
+			}else if (TwoPlayerText.text.Length == 0) {
+				StartCoroutine (RoomNameWarning ("Please enter the room name"));
+			} else if (TwoPlayerText.text.Length > 0) {
+				PlayerPrefs.SetString ("roomname", TwoPlayerText.text);
+				SceneManager.LoadScene ("BettingAmountFor2PlayerPlayWithFriends");
+			}
 		}
 		public void TakeRoomNameForFourPlayers()
 		{
-			
+			if (!isSelectedGameType) {
+				StartCoroutine (RoomNameWarning ("Please select the gametype"));
+			}else if (FourPlayerText.text.Length == 0) {
+				StartCoroutine (RoomNameWarning ("Please enter the room name"));
+			} else if (FourPlayerText.text.Length > 0) {
+				PlayerPrefs.SetString ("roomname", FourPlayerText.text);
+				SceneManager.LoadScene ("BettingAmountFor4PlayerPlayWithFriends");
+			}
+		}
+
+		public IEnumerator RoomNameWarning(string warn)
+		{
+			WarningText.text = warn;
+			yield return new WaitForSeconds (1);
+			WarningText.text = null;
 		}
 
 		//==============Method to Invite friend and Create Room======================//

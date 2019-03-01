@@ -20,9 +20,9 @@ public class ExtraSceneController : MonoBehaviour
 	{
 		Scene currScene = SceneManager.GetActiveScene();
 		SceneName = currScene.name;
-//		if (SceneName.Equals ("GameMenu")) {
-//			StartCoroutine(WinnerAPI("2","2"));
-//		}
+		if (SceneName.Equals ("BettingAmountFor2PlayerPlayWithFriends")) {
+			print (PlayerPrefs.GetString ("roomname"));
+		}
 	}
 //	.
 //	IEnumerator WinnerAPI(string playerid,string playerColor)
@@ -65,6 +65,9 @@ public class ExtraSceneController : MonoBehaviour
 		}
 	}
 
+
+
+
 	public void QuitTheGame()
 	{
 		Application.Quit ();
@@ -90,7 +93,8 @@ public class ExtraSceneController : MonoBehaviour
 	}
 	public void LoadBettingAmountFor4PlayerRandom()
 	{
-		SceneManager.LoadScene ("BettingAmountFor4PlayerRandom");
+		StartCoroutine( Warningmethod("This feature will be added very soon"));
+//		SceneManager.LoadScene ("BettingAmountFor4PlayerRandom");
 	}
 	public void LoadBettingAmountFor2PlayerPlayWithFriends()
 	{
@@ -139,7 +143,8 @@ public class ExtraSceneController : MonoBehaviour
 	}
 	public void Logout()
 	{
-		SceneManager.LoadScene ("GameMenu");
+//		SceneManager.LoadScene ("Home");
+		StartCoroutine(HitUrl11(0));
 	}
 	public void LoadFourPlayerGame()
 	{
@@ -311,6 +316,14 @@ public class ExtraSceneController : MonoBehaviour
 
 		} else {
 			print (request11.downloadHandler.text);
+			string msg = request11.downloadHandler.text;
+			msg = msg.Substring (1, msg.Length - 2);
+			JSONNode jn = SimpleJSON.JSONData.Parse (msg);
+			msg = jn [0];
+			if (msg.Equals ("Successful")) {
+				PlayerPrefs.SetString ("userid", null);
+				SceneManager.LoadScene ("Home");
+			}
 		}
 	}
 }

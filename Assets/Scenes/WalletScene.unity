@@ -250,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &138508165
 RectTransform:
   m_ObjectHideFlags: 0
@@ -332,10 +332,10 @@ RectTransform:
   m_Father: {fileID: 946639882}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.24249999, y: 0.7666194}
-  m_AnchorMax: {x: 0.75500005, y: 0.81476134}
-  m_AnchoredPosition: {x: 1, y: 0.5}
-  m_SizeDelta: {x: -8.600006, y: 2.2000122}
+  m_AnchorMin: {x: 0.24249999, y: 0.7296196}
+  m_AnchorMax: {x: 0.75875014, y: 0.81476134}
+  m_AnchoredPosition: {x: -0.5, y: 3.6669922}
+  m_SizeDelta: {x: -11.6, y: -4.1349983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672847737
 MonoBehaviour:
@@ -361,8 +361,8 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 60
+    m_MinSize: 14
+    m_MaxSize: 80
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 0
@@ -392,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &836550847
 RectTransform:
   m_ObjectHideFlags: 0
@@ -559,7 +559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &962242128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -712,6 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123593856}
   - component: {fileID: 1123593855}
+  - component: {fileID: 1123593857}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -730,6 +731,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd2eb542213224847a19c5a5464c84ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  QuitPanel: {fileID: 0}
+  TwoPlayerToggle: {fileID: 0}
+  FourPlayerToggle: {fileID: 0}
+  TwoPlayerGameObject: {fileID: 0}
+  FourPlayerGameObject: {fileID: 0}
+  WarningText: {fileID: 0}
+  Username: 
+  Emailid: 
+  Mobilenumber: 
+  Password: 
+  Newpassword: 
 --- !u!4 &1123593856
 Transform:
   m_ObjectHideFlags: 0
@@ -743,6 +755,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123593857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1123593854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c954476bf2462f45adb87e64cb4c1cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Balance: {fileID: 672847737}
 --- !u!1 &1172539323
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +783,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1172539324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -902,7 +926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1347663765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1038,7 +1062,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1682292766
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1193,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1859410155
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1281,10 +1305,10 @@ RectTransform:
   m_Father: {fileID: 946639882}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.46125, y: 0.819571}
-  m_AnchorMax: {x: 0.54, y: 0.84300005}
-  m_AnchoredPosition: {x: -0.49998474, y: 0.7000122}
-  m_SizeDelta: {x: 71.850006, y: 33.200012}
+  m_AnchorMin: {x: 0.35000002, y: 0.8228098}
+  m_AnchorMax: {x: 0.65125006, y: 0.84861964}
+  m_AnchoredPosition: {x: -0.49999237, y: -0.7000122}
+  m_SizeDelta: {x: 315.21, y: 30.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1906135954
 MonoBehaviour:
@@ -1318,7 +1342,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: inr
+  m_Text: balance in inr
 --- !u!222 &1906135955
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1510,7 +1534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2083190486
 RectTransform:
   m_ObjectHideFlags: 0

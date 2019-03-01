@@ -121,8 +121,8 @@ namespace Photon.Pun.UtilityScripts
 		//==========================In this section initial setup is done when player Enter in BoardRoom==========================// 
 		void Start () 
 		{
-			print ("http://apienjoybtc.exioms.me/api/Balance/gamewinlossbalance?userid=" + PlayerPrefs.GetString ("userid") + "&gamesessionid=1&intWalletType=1&dblamt=" + ThisLobbyName + "&gametype=2&roomid=" + PhotonNetwork.CurrentRoom.Name + "&date=" + System.DateTime.Now.ToString ("d") + "&playercolor=" + 2 + "&playerid=" + 2); 
-			PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 1000 ;
+			print ("http://apienjoybtc.exioms.me/api/Balance/gamewinlossbalance?userid=" + PlayerPrefs.GetString ("userid") + "&gamesessionid=1&intWalletType=1&dblamt=" + PlayerPrefs.GetString("amount") + "&gametype=2&roomid=" + PhotonNetwork.CurrentRoom.Name + "&date=" + System.DateTime.Now.ToString ("d") + "&playercolor=" + 2 + "&playerid=" + 2); 
+			PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 100 ;
 			GameObject OneOnOneConnectionManagerController = GameObject.Find ("SceneSWitchController");
 			this.turnManager = this.gameObject.AddComponent<PunTurnManager> ();
 			this.turnManager.TurnManagerListener = this;
@@ -130,7 +130,7 @@ namespace Photon.Pun.UtilityScripts
 			if(PhotonNetwork.InRoom)
 				name=PhotonNetwork.CurrentRoom.Name;
 			ThisRoomName = name;
-			ThisLobbyName = PhotonNetwork.CurrentLobby.Name;
+			ThisLobbyName = PlayerPrefs.GetString ("amount");
 			print (ThisLobbyName);
 			print (ThisRoomName);
 
@@ -206,11 +206,11 @@ namespace Photon.Pun.UtilityScripts
 		}
 
 		void RoomCanBeDiscard(){
-			if (!isTimeOut && PhotonNetwork.CurrentRoom.PlayerCount == 1) {
+			if (!isTimeOut && PhotonNetwork.CurrentRoom.PlayerCount == 1 ) {
 				if (TimePeriodTriggeredTime == 0) {
 					TimePeriodTriggeredTime = (int)Time.time;
 				}
-				if (TimePeriod < 60) {
+				if (TimePeriod < 60 && !isTimeOut) {
 					TimePeriod = (int)(Time.time - TimePeriodTriggeredTime);
 					Countdown.text = "" + (60 - TimePeriod);
 				}
@@ -242,6 +242,8 @@ namespace Photon.Pun.UtilityScripts
 					
 					StartCoroutine (AutoDisconnectFromRoom ());
 				
+				} else if (msg.Equals ("InvalidroomID")) {
+					StartCoroutine (AutoDisconnectFromRoom ());
 				}
 			}
 		}
@@ -368,6 +370,16 @@ namespace Photon.Pun.UtilityScripts
 		/// <summary>
 		//Disable and Enable Blueplayers Pices and GreenPlayers Pices
 		/// </summary>
+		/// 
+		void EnableFrameAndBorderForFirstTime()
+		{
+			GreenPlayerI.SetActive (true);
+			GreenPlayerII.SetActive (true);
+			GreenPlayerIII.SetActive (true);
+			GreenPlayerIV.SetActive (true);
+
+			BlueFrame.SetActive (true);
+		}
 		void DisablingBordersOFBluePlayer()
 		{
 			BluePlayerI_Border.SetActive (false);
@@ -2004,7 +2016,7 @@ namespace Photon.Pun.UtilityScripts
 		//Amount added in wallet
 		IEnumerator WinnerAPI(string playerid,string playerColor)
 		{
-			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/gamewinlossbalance?userid="+PlayerPrefs.GetString("userid")+"&gamesessionid=1&intWalletType=1&dblamt="+ThisLobbyName+"&gametype=2&roomid="+PhotonNetwork.CurrentRoom.Name+"&date="+System.DateTime.Now.ToString ("d")+"&playercolor="+playerColor+"&playerid="+playerid);
+			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/gamewinlossbalance?userid="+PlayerPrefs.GetString("userid")+"&gamesessionid=1&intWalletType=1&dblamt="+PlayerPrefs.GetString("amount")+"&gametype=2&roomid="+PhotonNetwork.CurrentRoom.Name+"&date="+System.DateTime.Now.ToString ("d")+"&playercolor="+playerColor+"&playerid="+playerid);
 			www.chunkedTransfer=false;
 			www.downloadHandler=new DownloadHandlerBuffer();
 			yield return www.SendWebRequest();
@@ -2021,7 +2033,7 @@ namespace Photon.Pun.UtilityScripts
 		}
 		//http://apienjoybtc.exioms.me/api/Balance/gameloss?userid=2&gamesessionid=1&intWalletType=2&dblamt=100&gametype=2&roomid=2PLDO1&date=27/02/2019&playercolor=1&playerid=1
 		IEnumerator LosserAPI(string playerid,string playerColor){
-			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/gameloss?userid="+PlayerPrefs.GetString("userid")+"&intWalletType=2&dblamt="+PhotonNetwork.CurrentLobby.Name+"&gametype=2&roomid="+PhotonNetwork.CurrentRoom.Name+"&date="+System.DateTime.Now.ToString ("d")+"&playercolor="+playerColor+"&playerid="+playerColor);
+			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/gameloss?userid="+PlayerPrefs.GetString("userid")+"&intWalletType=2&dblamt="+PlayerPrefs.GetString("amount")+"&gametype=2&roomid="+PhotonNetwork.CurrentRoom.Name+"&date="+System.DateTime.Now.ToString ("d")+"&playercolor="+playerColor+"&playerid="+playerColor);
 			www.chunkedTransfer = false;
 			www.downloadHandler = new DownloadHandlerBuffer ();
 			yield return www.SendWebRequest ();
@@ -2225,67 +2237,10 @@ namespace Photon.Pun.UtilityScripts
 
 		}
 		#endregion
-		public void StartTurn()
-		{
-			print ("StartTurn000");
 
-			if (PhotonNetwork.IsMasterClient)
-			{
-				print ("StartTurn1111");
 
-				this.turnManager.BeginTurn();
+		#region RoomJoinning And Lefting Related Callback Methods
 
-			}
-		}
-		void EnableFrameAndBorderForFirstTime()
-		{
-			GreenPlayerI.SetActive (true);
-			GreenPlayerII.SetActive (true);
-			GreenPlayerIII.SetActive (true);
-			GreenPlayerIV.SetActive (true);
-
-			BlueFrame.SetActive (true);
-		}
-		public override void OnPlayerEnteredRoom(Player newPlayer)
-		{
-			Debug.Log("Other player arrived turn = "+ this.turnManager.Turn );
-			print ("PlayerCounter:" + PhotonNetwork.CountOfPlayersInRooms);
-			playerCounter += 1;
-			if (PhotonNetwork.PlayerList.Length == 2) {
-				ImageFillingCounter = 1;
-				if (playerTurn.Equals ("BLUE") && PhotonNetwork.IsMasterClient) {
-					isMyTurn = true;
-				}
-				ReconnectButton.SetActive (false);
-				DisconnectText.text=null;
-				DisconnectPanel.SetActive (false);
-				if (this.turnManager.Turn == 0) {
-					isMyTurn = true;
-				}
-				EnableFrameAndBorderForFirstTime ();
-			}
-		}
-
-		public void OnClickReconnectAndReJoin()
-		{
-			if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) 
-			{
-				print ("internet connection");
-				PhotonNetwork.ReconnectAndRejoin ();
-			}
-			else if(Application.internetReachability == NetworkReachability.NotReachable)
-			{
-				print ("no Internet connection is there");
-				StartCoroutine (NoInternetConnectionWarning ());
-			}
-			print ("Attempting to rejoin the room");
-		}
-		IEnumerator NoInternetConnectionWarning()
-		{
-			DisconnectText.text = "PLEASE CONNECT TO INTERNET AND THEN CLICK THE BUTTON:";
-			yield return new WaitForSeconds (1);
-			DisconnectText.text ="DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
-		}
 		public override void OnLeftRoom ()
 		{
 			print ("Player left the room");
@@ -2346,5 +2301,66 @@ namespace Photon.Pun.UtilityScripts
 				ReconnectButton.SetActive (true);
 			}	
 		}
+
+
+		public override void OnPlayerEnteredRoom(Player newPlayer)
+		{
+			Debug.Log("Other player arrived turn = "+ this.turnManager.Turn );
+			print ("PlayerCounter:" + PhotonNetwork.CountOfPlayersInRooms);
+			playerCounter += 1;
+			if (PhotonNetwork.PlayerList.Length == 2) {
+				ImageFillingCounter = 1;
+				if (playerTurn.Equals ("BLUE") && PhotonNetwork.IsMasterClient) {
+					isMyTurn = true;
+				}
+				ReconnectButton.SetActive (false);
+				DisconnectText.text=null;
+				DisconnectPanel.SetActive (false);
+				if (this.turnManager.Turn == 0) {
+					isMyTurn = true;
+				}
+				EnableFrameAndBorderForFirstTime ();
+			}
+		}
+
+
+		#endregion
+
+		public void StartTurn()
+		{
+			print ("StartTurn000");
+
+			if (PhotonNetwork.IsMasterClient)
+			{
+				print ("StartTurn1111");
+
+				this.turnManager.BeginTurn();
+
+			}
+		}
+
+
+
+		public void OnClickReconnectAndReJoin()
+		{
+			if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) 
+			{
+				print ("internet connection");
+				PhotonNetwork.ReconnectAndRejoin ();
+			}
+			else if(Application.internetReachability == NetworkReachability.NotReachable)
+			{
+				print ("no Internet connection is there");
+				StartCoroutine (NoInternetConnectionWarning ());
+			}
+			print ("Attempting to rejoin the room");
+		}
+		IEnumerator NoInternetConnectionWarning()
+		{
+			DisconnectText.text = "PLEASE CONNECT TO INTERNET AND THEN CLICK THE BUTTON:";
+			yield return new WaitForSeconds (1);
+			DisconnectText.text ="DISCONNECTED FROM THE ROOM CLICK THE BUTTON TO REENTER THE ROOM";
+		}
+
 	}
 }

@@ -94,6 +94,7 @@ namespace Photon.Pun.UtilityScripts
 			RandomRoomName = PhotonNetwork.CurrentRoom.Name;
 			string tempRoomName = RandomRoomName;
 			print (tempRoomName);
+			print("http://apienjoybtc.exioms.me/api/Balance/bidgamebalance?userid="+id+"&gamesessionid="+1+"&intWalletType="+2+"&dblamt="+GameLobbyName+"&gametype="+2+"&roomid="+RandomRoomName+"&date="+System.DateTime.Now.ToString ("d"));
 			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/bidgamebalance?userid="+id+"&gamesessionid="+1+"&intWalletType="+2+"&dblamt="+GameLobbyName+"&gametype="+2+"&roomid="+RandomRoomName+"&date="+System.DateTime.Now.ToString ("d"));
 			www.chunkedTransfer = false;
 			www.downloadHandler = new DownloadHandlerBuffer ();
@@ -143,6 +144,10 @@ namespace Photon.Pun.UtilityScripts
 			yield return new WaitForSeconds (time);	
 			WarningText.text = "";
 		}
+
+
+		#region Room Creation And Join Related CallbackMethods
+
 		public override void OnConnectedToMaster()
 		{
 			print ("Conneced to master server:");
@@ -176,6 +181,7 @@ namespace Photon.Pun.UtilityScripts
 		}
 		public override void OnJoinedRoom()
 		{
+			PlayerPrefs.SetString ("amount", PhotonNetwork.CurrentLobby.Name);
 			print ("Joined Random Successfully");
 			print (PhotonNetwork.MasterClient.NickName);
 			print (PhotonNetwork.CurrentRoom.Name);
@@ -187,12 +193,15 @@ namespace Photon.Pun.UtilityScripts
 				roomOptions.IsVisible = false;
 				roomOptions.IsOpen = false;
 			}
+			JoinedRoomFlag = true;
 			if (!JoinedRoomFlag) {
 				StartCoroutine(AmountCheckingAfterEntering ());
 
 //				SceneManager.LoadScene("BettingAmountScene");
 			}
-			JoinedRoomFlag = true;
+
 		}
+
+		#endregion
 	}
 }

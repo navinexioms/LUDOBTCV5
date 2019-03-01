@@ -41,7 +41,7 @@ public class SceneController : MonoBehaviour
 			string AvatarNo = null;
 			AvatarNo = PlayerPrefs.GetString ("Avatar");
 
-			if (id.Length>0) {
+			if (id.Length>0 ) {
 				print ("User not Logged out");
 				LoginPanel.SetActive (false);
 				LoadGameOptionMenu ();
