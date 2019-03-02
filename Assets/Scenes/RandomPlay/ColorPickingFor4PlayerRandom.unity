@@ -1075,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &566050721
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1826,8 +1826,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1953390298}
-        m_MethodName: LoadFourPlayerGame
+      - m_Target: {fileID: 1953390297}
+        m_MethodName: FourPlayerGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2537,7 +2537,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1953390299}
-  - component: {fileID: 1953390298}
+  - component: {fileID: 1953390297}
   m_Layer: 5
   m_Name: SceneSwitchController
   m_TagString: Untagged
@@ -2545,7 +2545,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1953390298
+--- !u!114 &1953390297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2553,19 +2553,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1953390296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2eb542213224847a19c5a5464c84ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 18a18800e4f14754e9f2489d898ac3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuitPanel: {fileID: 0}
-  TwoPlayerToggle: {fileID: 0}
-  FourPlayerToggle: {fileID: 0}
-  TwoPlayerGameObject: {fileID: 0}
-  FourPlayerGameObject: {fileID: 0}
-  Username: 
-  Emailid: 
-  Mobilenumber: 
-  Password: 
-  Newpassword: 
 --- !u!224 &1953390299
 RectTransform:
   m_ObjectHideFlags: 0

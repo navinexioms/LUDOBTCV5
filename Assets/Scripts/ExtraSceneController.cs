@@ -93,8 +93,8 @@ public class ExtraSceneController : MonoBehaviour
 	}
 	public void LoadBettingAmountFor4PlayerRandom()
 	{
-		StartCoroutine( Warningmethod("This feature will be added very soon"));
-//		SceneManager.LoadScene ("BettingAmountFor4PlayerRandom");
+//		StartCoroutine( Warningmethod("This feature will be added very soon"));
+		SceneManager.LoadScene ("BettingAmountFor4PlayerRandom");
 	}
 	public void LoadBettingAmountFor2PlayerPlayWithFriends()
 	{

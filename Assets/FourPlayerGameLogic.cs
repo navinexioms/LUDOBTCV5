@@ -119,7 +119,7 @@ namespace Photon.Pun.UtilityScripts
 
 		void Start () 
 		{
-			PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 1000 ;
+			PhotonNetwork.NetworkingClient.LoadBalancingPeer.DisconnectTimeout = 5000 ;
 			GameObject OneOnOneConnectionManagerController = GameObject.Find ("SceneSWitchController");
 			this.turnManager = this.gameObject.AddComponent<PunTurnManager> ();
 			this.turnManager.TurnManagerListener = this;
@@ -176,21 +176,33 @@ namespace Photon.Pun.UtilityScripts
 			switch(PhotonNetwork.CurrentRoom.PlayerCount)
 			{
 			case 1:
+				print ("First player Entered Room");
 				DisablingBluePlayer ();
 				DisablingRedPlayer ();
 				DisablingGreenPlayer ();
+				DisconnectPanel.SetActive (true);
+				ReconnectButton.SetActive(false);
+				DisconnectText.text="WAIT TILL THE OTHER PLAYER TO CONNECT";
 				break;
 			case 2:
 				EnablingBluePlayer ();
 				DisablingRedPlayer ();
 				DisablingGreenPlayer ();
+				DisconnectPanel.SetActive (true);
+				ReconnectButton.SetActive(false);
+				DisconnectText.text="WAIT TILL THE OTHER TO PLAYER CONNECT";
 				break;
 			case 3:
 				EnablingBluePlayer ();
 				EnablingRedPlayer ();
 				DisablingGreenPlayer ();
+				DisconnectPanel.SetActive (true);
+				ReconnectButton.SetActive(false);
+				DisconnectText.text="WAIT TILL THE OTHER TO PLAYER CONNECT";
 				break;
 			case 4:
+				DisconnectPanel.SetActive (false);
+				DisconnectText.text = null;
 				YellowFrame.SetActive (true);
 				EnablingBluePlayer ();
 				EnablingRedPlayer ();
@@ -199,6 +211,10 @@ namespace Photon.Pun.UtilityScripts
 			}
 		}
 
+		void Update()
+		{
+			print(PhotonNetwork.CurrentRoom.PlayerCount);
+		}
 		void DisablingBluePlayer()
 		{
 			BluePlayerI.SetActive (false);
@@ -352,16 +368,19 @@ namespace Photon.Pun.UtilityScripts
 				DisablingGreenPlayer ();
 				break;
 			case 2:
+				print ("Second player Entered Room");
 				EnablingBluePlayer ();
 				DisablingRedPlayer ();
 				DisablingGreenPlayer ();
 				break;
 			case 3:
+				print ("Third player Entered Room");
 				EnablingBluePlayer ();
 				EnablingRedPlayer ();
 				DisablingGreenPlayer ();
 				break;
 			case 4:
+				print ("Fourth player Entered Room");
 				YellowFrame.SetActive (true);
 				EnablingBluePlayer ();
 				EnablingRedPlayer ();

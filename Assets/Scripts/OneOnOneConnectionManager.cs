@@ -94,8 +94,8 @@ namespace Photon.Pun.UtilityScripts
 			RandomRoomName = PhotonNetwork.CurrentRoom.Name;
 			string tempRoomName = RandomRoomName;
 			print (tempRoomName);
-			print("http://apienjoybtc.exioms.me/api/Balance/bidgamebalance?userid="+id+"&gamesessionid="+1+"&intWalletType="+2+"&dblamt="+GameLobbyName+"&gametype="+2+"&roomid="+RandomRoomName+"&date="+System.DateTime.Now.ToString ("d"));
-			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/bidgamebalance?userid="+id+"&gamesessionid="+1+"&intWalletType="+2+"&dblamt="+GameLobbyName+"&gametype="+2+"&roomid="+RandomRoomName+"&date="+System.DateTime.Now.ToString ("d"));
+			print("http://apienjoybtc.exioms.me/api/Balance/bidgamebalance?userid="+PlayerPrefs.GetString("userid")+"&gamesessionid="+1+"&intWalletType="+2+"&dblamt="+GameLobbyName+"&gametype="+4+"&roomid="+RandomRoomName+"&date="+System.DateTime.Now.ToString ("d"));
+			UnityWebRequest www = new UnityWebRequest ("http://apienjoybtc.exioms.me/api/Balance/bidgamebalance?userid="+PlayerPrefs.GetString("userid")+"&gamesessionid="+1+"&intWalletType="+2+"&dblamt="+GameLobbyName+"&gametype="+2+"&roomid="+RandomRoomName+"&date="+System.DateTime.Now.ToString ("d"));
 			www.chunkedTransfer = false;
 			www.downloadHandler = new DownloadHandlerBuffer ();
 			yield return www.SendWebRequest ();
@@ -187,21 +187,13 @@ namespace Photon.Pun.UtilityScripts
 			print (PhotonNetwork.CurrentRoom.Name);
 			if (PhotonNetwork.PlayerList.Length == 2) 
 			{
-				
 				isRemote = true;
-				RoomOptions roomOptions = new RoomOptions ();
-				roomOptions.IsVisible = false;
-				roomOptions.IsOpen = false;
+				if (!JoinedRoomFlag) {
+					StartCoroutine(AmountCheckingAfterEntering ());
+				}
 			}
 			JoinedRoomFlag = true;
-			if (!JoinedRoomFlag) {
-				StartCoroutine(AmountCheckingAfterEntering ());
-
-//				SceneManager.LoadScene("BettingAmountScene");
-			}
-
 		}
-
 		#endregion
 	}
 }

@@ -43,7 +43,6 @@ namespace Photon.Pun.UtilityScripts
 		public GameObject WinPanel, LosePanel;
 
 		public Text DisconnectText;
-		public Text DisconnectText1;
 		public GameObject ReconnectButton;
 
 
