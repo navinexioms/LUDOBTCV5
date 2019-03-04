@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 
 public class SceneController : MonoBehaviour
 {
+	public GameObject LoadingImage;
 	public GameObject SplashScreen;
 	public GameObject LoginPanel;
 	public GameObject Blackscreen;
@@ -75,10 +76,12 @@ public class SceneController : MonoBehaviour
 		}
 		else if (Application.internetReachability == NetworkReachability.NotReachable) 
 		{
+			
 			StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1.1f, "please connect to internet"));	
 		}
 		else if (Username.Length > 0 && Password.Length > 0 && (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)) 
 		{
+			LoadingImage.SetActive (true);
 			StartCoroutine (HitUrl());
 		}
 
@@ -154,6 +157,7 @@ public class SceneController : MonoBehaviour
 				}
 				else {
 					print ("Invalid");
+					LoadingImage.SetActive (false);
 					StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1.1f, "invalid login credentials"));
 				}
 			} 
@@ -183,8 +187,10 @@ public class SceneController : MonoBehaviour
 			if (status1.Equals ("Successful")) {
 				if (AvatarSelectionValue == 11) {
 					print ("Not Selected the Avatar");
+					LoadingImage.SetActive (false);
 					StartCoroutine (LoadPanel (LoginPanel, AvatarScreen, 1f, "a"));
 				}else if (AvatarSelectionValue < 11) {
+					LoadingImage.SetActive (false);
 					print ("Selected the Avatar");
 					LoadGameOptionMenu ();
 				}

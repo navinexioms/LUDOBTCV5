@@ -14,8 +14,10 @@ namespace Photon.Pun.UtilityScripts
 		public static bool isMaster,isRemote1,isRemote2,isRemote3,JoinedRoomFlag;
 		public Text WarningText;
 		private GameObject QuitPanel;
+		public GameObject LoadingImage;
 		public string GameLobbyName=null;
 		public string RandomRoomName = null;
+		public bool isSelectedAmount;
 	// Use this for initialization
 		void Awake()
 		{
@@ -61,6 +63,7 @@ namespace Photon.Pun.UtilityScripts
 		IEnumerator RoomCreationMethod()
 		{
 			print ("RoomCreationMethod");
+
 			string userid = PlayerPrefs.GetString ("userid");
 			string sessionId = "" + 1;
 			int gameType = 4;
@@ -123,10 +126,13 @@ namespace Photon.Pun.UtilityScripts
 
 		public void CreateRoomMethod()
 		{
-			if(GameLobbyName.Length==0){
-				StartCoroutine (WarningForRoom ("Please select the amount",2));
+			if (GameLobbyName.Length == 0) {
+				StartCoroutine (WarningForRoom ("Please select the amount", 2));
+			} else if (GameLobbyName.Equals ("nothing")) {
+				StartCoroutine (WarningForRoom ("You don't have sufficient balance for bid",2));
 			}
 			else if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork) {
+				LoadingImage.SetActive (true);
 				if (PhotonNetwork.AuthValues == null) {
 					PhotonNetwork.AuthValues = new Photon.Realtime.AuthenticationValues ();
 				}

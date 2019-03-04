@@ -361,6 +361,7 @@ RectTransform:
   - {fileID: 1034035287}
   - {fileID: 2104032616}
   - {fileID: 268283474}
+  - {fileID: 220402338}
   m_Father: {fileID: 885577216}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -414,6 +415,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!1 &220402337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 220402338}
+  - component: {fileID: 220402340}
+  - component: {fileID: 220402339}
+  m_Layer: 5
+  m_Name: Text (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &220402338
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 220402337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 193398386}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.08625001, y: 0.10300001}
+  m_AnchorMax: {x: 0.9375, y: 0.19831759}
+  m_AnchoredPosition: {x: 6.899994, y: -2.8999634}
+  m_SizeDelta: {x: -7.299988, y: -23.899994}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &220402339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 220402337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 2913e1b14aecb6e489ebc3e7b42e186d, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &220402340
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 220402337}
 --- !u!1 &268283473
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +984,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 10
+  m_Text: 
 --- !u!222 &466483101
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1228,7 +1303,7 @@ GameObject:
   - component: {fileID: 723171855}
   - component: {fileID: 723171856}
   m_Layer: 5
-  m_Name: GreenToggle
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1295,7 +1370,18 @@ MonoBehaviour:
   m_Group: {fileID: 193398389}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1953390297}
+        m_MethodName: ColorPickAPI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -1680,7 +1766,7 @@ GameObject:
   - component: {fileID: 1034035287}
   - component: {fileID: 1034035288}
   m_Layer: 5
-  m_Name: Toggle (3)
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1747,7 +1833,18 @@ MonoBehaviour:
   m_Group: {fileID: 193398389}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1953390297}
+        m_MethodName: ColorPickAPI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -1882,7 +1979,7 @@ GameObject:
   - component: {fileID: 1169257518}
   - component: {fileID: 1169257519}
   m_Layer: 5
-  m_Name: RedToggle
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1949,7 +2046,18 @@ MonoBehaviour:
   m_Group: {fileID: 193398389}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1953390297}
+        m_MethodName: ColorPickAPI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -2105,7 +2213,7 @@ GameObject:
   - component: {fileID: 1442683614}
   - component: {fileID: 1442683615}
   m_Layer: 5
-  m_Name: YellowToggle
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2172,7 +2280,18 @@ MonoBehaviour:
   m_Group: {fileID: 193398389}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1953390297}
+        m_MethodName: ColorPickAPI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
@@ -2556,6 +2675,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a18800e4f14754e9f2489d898ac3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isColorSelected: 0
+  TimeTrigger: 0
+  isTimeEnded: 0
+  CanProceed: 1
+  isAutoSelected: 0
+  isGotResponce: 0
+  TriggeredTime: 0
+  CountDownTime: 0
+  ActualTime: 0
+  ColorNumber: 
+  CountDown: {fileID: 466483100}
+  MessageBx: {fileID: 220402339}
+  Colors:
+  - {fileID: 1442683615}
+  - {fileID: 1034035288}
+  - {fileID: 1169257519}
+  - {fileID: 723171856}
+  Locks:
+  - {fileID: 1696270075}
+  - {fileID: 1607439064}
+  - {fileID: 463229849}
+  - {fileID: 1240147774}
+  RemainingNumbers: 01000000020000000300000004000000
 --- !u!224 &1953390299
 RectTransform:
   m_ObjectHideFlags: 0
